@@ -1,5 +1,8 @@
 class Conta{
   constructor(saldo_inicial, cliente, agencia) {
+    if(this.constructor == conta) {
+      throw new Error('A Classe conta é uma classe abstrata nao podendo ser instanciada ela diretamente.')
+    }
     this._saldo = saldo_inicial;
     this._cliente = cliente;
     this._agencia = agencia;
@@ -26,13 +29,18 @@ class Conta{
     this._saldo += valor;
   }
 
-  sacar(valor){
-    let taxa = 1;
+  //metodo abstrado so server para ser sobreescrito.
+  sacar(valor) {
+    throw new Error('O método da sacar da conta é abstrato')
+  }
+
+  _sacar(valor, taxa){
     const valorSacado = taxa * valor
     if(this._saldo >= valorSacado) {
       this._saldo -= valorSacado;   
       return valorSacado;
     }
+    return 0;
   }
 
   transferir(valor, conta) {
